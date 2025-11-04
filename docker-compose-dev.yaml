@@ -1,0 +1,20 @@
+services:
+  allure-server:
+    image: frankescobar/allure-docker-service:latest
+    container_name: allure-server
+    environment:
+      KEEP_HISTORY: 1
+      OPTIMIZE_STORAGE: 1
+      CHECK_RESULTS_EVERY_SECONDS: NONE
+      KEEP_HISTORY_LATEST: 25
+      EMAILABLE_REPORT_TITLE: "Automation Test Results"
+      SECURITY_ENABLED: 1
+      SECURITY_USER: 'admin'
+      SECURITY_PASS: 'admin'
+      SECURITY_VIEW_USER: 'user'
+      SECURITY_VIEW_PASSWORD: 'password'
+    ports:
+      - "8080:5050"
+    volumes:
+      - ${PWD}/allure-results:/app/allure-results
+      - ${PWD}/allure-reports:/app/allure-docker-api/static/allure-framework/reports

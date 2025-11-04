@@ -1,0 +1,4 @@
+selenium
+requests
+allure-python-commons
+python-dotenv

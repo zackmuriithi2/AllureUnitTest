@@ -1,0 +1,7 @@
+**/__pycache__
+/allure-results
+/allure-reports
+/logs/*
+
+**/*.env
+**/*.log

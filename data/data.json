@@ -1,0 +1,30 @@
+{
+  "project_name": "NMB-Admin-Portal",
+  "base_url": "https://dev-admin-portal.nmbtz.com/",
+  "browsers": ["chrome", "firefox"],
+  "users": [
+    {
+      "username": "wronguser",
+      "description": "Wrong user credentials",
+      "password": "Qwertuiop2024!"
+    },
+    {
+      "username": "admin",
+      "description": "Correct test user",
+      "password": "admin1234"
+    }
+  ],
+  "names": {
+      "first_names": [
+        "Jane", "Joe", "Alpha", "Betty", "Chris", "Diana", "Elvis", "Fatima", "Gon", "Hellen", "Ian", "Judith", "Kenny", "Lilian", "Matt", "Nancy", "Owen", "Purity", "Quagmire", "Ripley", "Susan", "Test", "Unknown", "Vera", "Wrong", "Xana", "Yan", "Zelda"
+      ],
+      "last_names": [
+        "Kariuki", "Wamalwa", "Owino", "Chelangat", "Oloisen", "Kadzo", "Tar", "User", "Element", "Bosibori", "Musyoka", "Chinji"
+      ]
+    },
+  "descriptions": [
+      "This is a test description.", "This is used to describe a test item.", "More information about a test entry.", "Just testing a functionality here.", "Nothing to see here, just test data.", "Testing 1, 2. Testing 1, 2, 3.", "Test description for the field."
+    ],
+  "products": {
+  }
+}

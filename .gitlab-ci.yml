@@ -1,0 +1,78 @@
+image: python:3.11
+
+stages:
+  - test
+
+variables:
+  RETRIES: 30
+  DELAY: 5
+
+chrome-test-job:
+  services:
+    - name: selenium/standalone-chrome:latest
+  stage: test
+  variables:
+    BROWSER: "chrome"
+  tags:
+    - android
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "template" && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - chmod +x ./bash_scripts/check_selenium_service.sh
+    - export SELENIUM_URL="http://selenium__standalone-$BROWSER:4444/wd/hub"
+    - ./bash_scripts/check_selenium_service.sh $SELENIUM_URL $RETRIES $DELAY
+    - pip install -r requirements.txt
+  script:
+    - python Test/TestSuite/TestRunner.py
+  artifacts:
+    when: always
+    expire_in: "7 days"
+    paths:
+      - Reports/**
+    
+firefox-test-job:
+  services:
+    - name: selenium/standalone-firefox:latest
+  stage: test
+  variables:
+    BROWSER: "firefox"
+  tags:
+    - scan
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "template" && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - chmod +x ./bash_scripts/check_selenium_service.sh
+    - export SELENIUM_URL="http://selenium__standalone-$BROWSER:4444/wd/hub"
+    - ./bash_scripts/check_selenium_service.sh $SELENIUM_URL $RETRIES $DELAY
+    - pip install -r requirements.txt
+  script:
+    - python Test/TestSuite/TestRunner.py
+  artifacts:
+    when: always
+    expire_in: "7 days"
+    paths:
+      - Reports/**
+
+edge-test-job:
+  services:
+    - name: selenium/standalone-edge:latest
+  stage: test
+  variables:
+    BROWSER: "edge"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "template" && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - chmod +x ./bash_scripts/check_selenium_service.sh
+    - export SELENIUM_URL="http://selenium__standalone-$BROWSER:4444/wd/hub"
+    - ./bash_scripts/check_selenium_service.sh $SELENIUM_URL $RETRIES $DELAY
+    - pip install -r requirements.txt
+  script:
+    - python Test/TestSuite/TestRunner.py
+  artifacts:
+    when: always
+    expire_in: "7 days"
+    paths:
+      - Reports/**
